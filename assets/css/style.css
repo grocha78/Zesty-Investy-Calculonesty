@@ -1,0 +1,17 @@
+body {
+background: #0F2027;
+background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+background-blend-mode: multiply,multiply;
+background-attachment: fixed;
+}
+
+h1, h2 {
+background: #49d4c8;
+background: linear-gradient(to right, #a6f0a1 0%, #67c5c3 50%, #7dcdb9 51%, #348370 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.btn {
+    background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%);
+}
