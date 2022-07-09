@@ -9,8 +9,6 @@ var contributions = document.getElementById("contributions");
 var message = document.getElementById("message");
 var button = document.querySelector(".input-group-button");
 
-button.addEventListener("click", calculateGrowth);
-
 var data = [];
 var labels = [];
 
@@ -64,3 +62,5 @@ var drawGraph = function () {
 var toDecimal = function (value, decimals) {
   return +value.toFixed(decimals);
 };
+
+button.addEventListener("click", calculateGrowth);
