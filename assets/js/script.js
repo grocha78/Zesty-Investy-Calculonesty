@@ -1,17 +1,66 @@
-var getFinancialData = function (date1, date2) {
-  var ticker = "SPY";
-  var date1 = "2019-01-05";
-  var date2 = "2022-01-05";
-  var apiKey = "gPd2zyM9aM9X1O3H2siv9B8iDbAkvltl";
-  var apiUrl = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/${date1}/${date2}?apiKey=${apiKey}`;
+var context = document.getElementById("data-set").getContext("2d");
+var bar = new Chart(context, {});
 
-  fetch(apiUrl).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (data) {
-        console.log(data);
-      });
+var intialAmount = document.getElementById("initial-amount");
+var years = document.getElementById("years");
+var rates = document.getElementById("rates");
+var contributions = document.getElementById("contributions");
+
+var message = document.getElementById("message");
+var button = document.querySelector(".input-group-button");
+
+button.addEventListener("click", calculateGrowth);
+
+var data = [];
+var labels = [];
+
+var calculateGrowth = function (e) {
+  e.preventDefault();
+  data.length = 0;
+  labels.length = 0;
+  var growth = 0;
+  try {
+    var initial = parseInt(intialAmount.value);
+    var period = parseInt(years.value);
+    var interest = parseInt(rates.value);
+    var contribute = parseInt(contributions.value);
+
+    for (var i = 1; i <= period; i++) {
+      let dollarUSLocale = Intl.NumberFormat("en-US");
+      var final =
+        contribute + initial * Math.pow(1 + interest / 100 / 1, 1 * i);
+      data.push(toDecimal(final, 2));
+      labels.push("Year " + i);
+      growth = toDecimal(final, 2);
+      growth = dollarUSLocale.format(growth);
     }
+
+    message.innerText = `You will have this amount $${growth} after ${period} years`;
+    drawGraph();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+var drawGraph = function () {
+  bar.destroy();
+  bar = new Chart(context, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [
+        {
+          label: "Growth throughout the Years",
+          data,
+          fill: true,
+          backgroundColor: "rgba(12, 141, 0, 0.7)",
+          borderWidth: 0,
+        },
+      ],
+    },
   });
 };
 
-getFinancialData();
+var toDecimal = function (value, decimals) {
+  return +value.toFixed(decimals);
+};
