@@ -1,51 +1,47 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Zesty Investy</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zesty Investy Calculonesty</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
   </head>
   <body>
-    <div class="container">
-        <h1 class="text-center">Your Investment Calculator</h1>
-        <div class="col-md-12 inputs">
-            <h2 class="text-center text-warning">Amounts Invested</h2>
-            <form>
-                <div class="row">
-                    <div class="col-sm-6 col-md-3">
-                        <label>Starting Balance</label>
-                        <input type="number" class="form-control" id="startingBalance" value="1000" min="1" 
-                        max="999999999">
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <label>Monthly Deposit</label>
-                        <input type="number" class="form-control" id="monthlyDeposit" value="100" min="1" 
-                        max="999999999">
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <label>Expected Return (%)</label>
-                        <input type="number" class="form-control" id="expectedReturn" value="6" min="1" 
-                        max="100">
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <label>Duration (years)</label>
-                        <input type="number" class="form-control" id="duration" value="5" min="1" 
-                        max="999">
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <button type="submit" class="btn my-4 m-auto" id="submit">
-                        Calculate Balance
-                    </button>  
-                </div>
-            </form>
+    <section class="container">
+      <div class="calculator">
+        <div class="heading">
+          <h3>Compound Interest Calculator</h3>
+          <small>Your money growth over time using compound interest...</small>
         </div>
-    </div>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <form class="compound-form">
+          <div class="input-group">
+            <label for="initialamount">Initial Investment Amount</label>
+            <input type="number" id="initial-amount" />
+          </div>
+          <div class="input-group">
+            <label for="years">Years Until Retirement</label>
+            <input type="number" id="years" />
+          </div>
+          <div class="input-group">
+            <label for="contributions">Monthly Contributions</label>
+            <input type="number" id="contributions" />
+          </div>
+          <div class="input-group">
+            <label for="rates">Approximate Annual Return (%)</label>
+            <input type="number" id="rates" />
+          </div>
+          <div class="input-group input-group-button">
+            <button>Calculate</button>
+          </div>
+        </form>
+      </div>
+      <div class="results">
+        <h3 id="message"></h3>
+        <canvas id="data-set"></canvas>
+      </div>
+    </section>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
