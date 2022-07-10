@@ -4,68 +4,72 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Compound Interest Calculator</title>
+    <title>Zesty Investy Calculonesty</title>
     <link rel="stylesheet" href="./assets/css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
   </head>
   <body>
+    <header>
+        <h1>Zesty Investy</h1>
+    </header>
     <section class="container">
-      <div class="calculator">
-        <div class="heading">
-          <h3>Compound Interest Calculator</h3>
-          <small>Your money growth over time using compound interest...</small>
+        <div class="calculator">
+          <div class="heading">
+            <h3>Compound Interest Calculator</h3>
+            <small>Your money growth over time using compound interest...</small>
+          </div>
+          <form class="compound-form">
+            <div class="input-group">
+              <label for="initialamount">Initial Investment Amount</label>
+              <input type="number" id="initial-amount" />
+            </div>
+            <div class="input-group">
+              <label for="years">Years Until Retirement</label>
+              <input type="number" id="years" />
+            </div>
+            <div class="input-group">
+              <label for="contributions">Monthly Contributions</label>
+              <input type="number" id="contributions" />
+            </div>
+            <div class="input-group">
+              <label for="rates">Approximate Annual Return (%)</label>
+              <input type="number" id="rates" />
+            </div>
+            <!-- <div class="input-group">
+              <label for="rates">Compound Interval</label>
+              <select id="compound">
+                <option value="1">Annualy</option>
+                <option value="2">Semiannualy</option>
+                <option value="4">Quartely</option>
+                <option value="12">Monthly</option>
+              </select>
+            </div> -->
+            <div class="input-group input-group-button">
+              <button>Calculate</button>
+            </div>
+          </form>
         </div>
-        <form class="compound-form">
-          <div class="input-group">
-            <label for="initialamount">Initial Investment Amount</label>
-            <input type="number" id="initial-amount" />
-          </div>
-          <div class="input-group">
-            <label for="years">Years Until Retirement</label>
-            <input type="number" id="years" />
-          </div>
-          <div class="input-group">
-            <label for="contributions">Monthly Contributions</label>
-            <input type="number" id="contributions" />
-          </div>
-          <div class="input-group">
-            <label for="rates">Approximate Annual Return (%)</label>
-            <input type="number" id="rates" />
-          </div>
-          <!-- <div class="input-group">
-            <label for="rates">Compound Interval</label>
-            <select id="compound">
-              <option value="1">Annualy</option>
-              <option value="2">Semiannualy</option>
-              <option value="4">Quartely</option>
-              <option value="12">Monthly</option>
-            </select>
-          </div> -->
-          <div class="input-group input-group-button">
-            <button>Calculate</button>
-          </div>
-        </form>
-      </div>
-      <div class="results">
-        <h3 id="message"></h3>
-        <canvas id="data-set"></canvas>
-      </div>
-      <div class="hide" id="conversion-container">
-        <form class="conversion-form">
-          <div class="input-group">
-            <label for="conversions">Conversion Rates Using the USD.</label>
-            <input
-              type="char"
-              maxlength="3"
-              min="3"
-              id="currency-conversions"
-            />
-            <div class="converted-amount"></div>
-          </div>
-          <button class="conversion-btn">Calculate Exchange Rate</button>
-        </form>
-      </div>
-    </section>
-    <script src="./assets/js/script.js"></script>
-  </body>
-</html>
+        <div class="results">
+          <h3 id="message"></h3>
+          <canvas id="data-set"></canvas>
+        </div>
+        <div class="hide" id="conversion-container">
+          <form class="conversion-form">
+            <div class="input-group">
+              <label for="conversions">Conversion Rates Using the USD.</label>
+              <input
+                type="char"
+                maxlength="3"
+                min="3"
+                id="currency-conversions"
+              />
+              <div class="converted-amount"></div>
+            </div>
+            <button class="conversion-btn">Calculate Exchange Rate</button>
+          </form>
+        </div>
+      </section>
+      <script src="./assets/js/script.js"></script>
+    </body>
+  </html>
+  
