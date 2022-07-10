@@ -63,4 +63,6 @@ var toDecimal = function (value, decimals) {
   return +value.toFixed(decimals);
 };
 
+var createForm = function () {};
+
 button.addEventListener("click", calculateGrowth);
