@@ -64,3 +64,101 @@ var toDecimal = function (value, decimals) {
 };
 
 button.addEventListener("click", calculateGrowth);
+
+// possible local storage function
+// "city" has been turned into "results" per class id on line 43 of html
+// is the getWeather function below equal to the calculateGrowth function above?
+
+// var searchHistoryEl = $("#search-history");
+// var calculateInputEL = $("#calculate-input");
+// var searchButtonEl = $("#search-button");
+// var currentDayEl = $("#current-day");
+// var forecastEl = $("#forecast");
+
+// var currentHistory = [];
+
+// function getCoordinates(results) {
+//     let apiUrl = ""
+
+//     fetch(apiUrl).then(function(response){
+//         if(response.ok){
+//           response.json().then(function(results) {
+//             getWeather(results[0].lat, results[0].lon, results[0].name);
+//           })
+//         }
+//       })
+// }
+
+// function search(searchHistory) { 
+//     let results = "";
+  
+//     if(!searchHistory) {
+//       function toTitleCase(str) {
+//         let lower = str.toLowerCase();
+//         return lower.replace(/(?:^|\s)\w/g, function(match){
+//           return match.toUpperCase();
+//         })
+//       };
+  
+//       results = toTitleCase($(calculateInputEl).val().trim());
+  
+//       if(results==="") {
+//         return;
+//       } else if(currentHistory.includes(results,0)) {
+//         // do nothing and continue with search
+//       } else {
+//         currentHistory.push(results);
+//         localStorage.setItem("search",JSON.stringify(currentHistory));
+//       }
+//     } else {
+//       results = searchHistory.trim();
+//     }
+  
+//     getCoordinates(results);
+  
+//     calculateInputEl.val("");
+//   };
+  
+//   // Populates search history column
+//   function renderSearchHistory() {
+//     searchHistoryEl.empty();
+  
+//     for(var i=0;i<currentHistory.length;i++) {
+//       searchHistoryEl.prepend("<button type='submit' class='history-item mb-3 btn rounded bg-success w-100 font-weight-bold'>" + currentHistory[i] + "</button>");
+//     }
+//   }
+  
+//   // Loads search history and writes to page
+//   function loadStorage() {
+//     var searchHistory = localStorage.getItem("search");
+  
+//     if(!searchHistory) {
+//       return false;
+//     }
+  
+//     currentHistory=JSON.parse(searchHistory);
+  
+//     for(var i=0; i<currentHistory.length; i++) {
+//       searchHistoryEl.prepend("<button type='submit' class='history-item mb-3 btn rounded bg-success w-100 font-weight-bold'>" + currentHistory[i] + "</button>");
+//     }
+//   }
+  
+//   // removes necessary elements before running subsequent search
+//   // Converts search to title case and stores in localStorage before passing to getCoordinates()
+//   $(searchButtonEl).on("click",searchInputEl,function(){
+//     currentDayEl.children("*").remove();
+//     forecastEl.children("*").remove();
+//     search();
+//     renderSearchHistory();
+//   });
+  
+//   //search on history item when clicked
+//   //do not log entry to search history as it already exists there
+//   $(searchHistoryEl).on("click", function(event){
+//     var historySearchTerm = event.target.textContent;
+//     currentDayEl.children("*").remove();
+//     forecastEl.children("*").remove();
+//     search(historySearchTerm);
+//   });
+  
+//   loadStorage();
