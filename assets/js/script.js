@@ -8,6 +8,9 @@ var contributions = document.getElementById("contributions");
 
 var message = document.getElementById("message");
 var button = document.querySelector(".input-group-button");
+var conversionButton = document.querySelector(".conversion-btn");
+var conversionContainerEl = document.querySelector("#conversion-container");
+var convertedAmount = document.querySelector(".converted-amount");
 
 var data = [];
 var labels = [];
@@ -29,12 +32,15 @@ var calculateGrowth = function (e) {
         contribute + initial * Math.pow(1 + interest / 100 / 1, 1 * i);
       data.push(toDecimal(final, 2));
       labels.push("Year " + i);
-      growth = toDecimal(final, 2);
-      growth = dollarUSLocale.format(growth);
+      rawGrowth = toDecimal(final, 2);
+      growth = dollarUSLocale.format(rawGrowth);
     }
 
     message.innerText = `You will have this amount $${growth} after ${period} years`;
     drawGraph();
+    var investmentTotal = localStorage.setItem("Account-Balance", rawGrowth);
+    conversionContainerEl.classList.remove("hide");
+    return investmentTotal;
   } catch (error) {
     console.error(error);
   }
@@ -51,7 +57,7 @@ var drawGraph = function () {
           label: "Growth throughout the Years",
           data,
           fill: true,
-          backgroundColor: "rgb(212, 175, 55)",
+          backgroundColor: "rgba(12, 141, 0, 0.7)",
           borderWidth: 0,
         },
       ],
@@ -65,100 +71,40 @@ var toDecimal = function (value, decimals) {
 
 button.addEventListener("click", calculateGrowth);
 
-// possible local storage function
-// "city" has been turned into "results" per class id on line 43 of html
-// is the getWeather function below equal to the calculateGrowth function above?
+var calculateConversion = function (event) {
+  event.preventDefault();
+  var myHeaders = new Headers();
+  myHeaders.append("apikey", "21x8PSp7AjckH13xSwlutwsSoLp93Tib");
 
-// var searchHistoryEl = $("#search-history");
-// var calculateInputEL = $("#calculate-input");
-// var searchButtonEl = $("#search-button");
-// var currentDayEl = $("#current-day");
-// var forecastEl = $("#forecast");
+  var requestOptions = {
+    method: "GET",
+    redirect: "follow",
+    headers: myHeaders,
+  };
 
-// var currentHistory = [];
+  var investmentTotal = localStorage.getItem("Account-Balance");
+  var countryInput = document.querySelector("#currency-conversions");
+  var to = countryInput.value;
 
-// function getCoordinates(results) {
-//     let apiUrl = ""
+  console.log(to, investmentTotal);
+  fetch(
+    `https://api.apilayer.com/exchangerates_data/convert?to=${to}&from=USD&amount=${investmentTotal}`,
+    requestOptions
+  ).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (data) {
+        convertedValue(data);
+      });
+    }
+  });
 
-//     fetch(apiUrl).then(function(response){
-//         if(response.ok){
-//           response.json().then(function(results) {
-//             getWeather(results[0].lat, results[0].lon, results[0].name);
-//           })
-//         }
-//       })
-// }
+  var convertedValue = function (value) {
+    console.log(value.result);
+    rawValue = value.result;
+    filteredValue = toDecimal(rawValue, 2);
+    convertedAmount.textContent = filteredValue;
+  };
+};
 
-// function search(searchHistory) { 
-//     let results = "";
-  
-//     if(!searchHistory) {
-//       function toTitleCase(str) {
-//         let lower = str.toLowerCase();
-//         return lower.replace(/(?:^|\s)\w/g, function(match){
-//           return match.toUpperCase();
-//         })
-//       };
-  
-//       results = toTitleCase($(calculateInputEl).val().trim());
-  
-//       if(results==="") {
-//         return;
-//       } else if(currentHistory.includes(results,0)) {
-//         // do nothing and continue with search
-//       } else {
-//         currentHistory.push(results);
-//         localStorage.setItem("search",JSON.stringify(currentHistory));
-//       }
-//     } else {
-//       results = searchHistory.trim();
-//     }
-  
-//     getCoordinates(results);
-  
-//     calculateInputEl.val("");
-//   };
-  
-//   // Populates search history column
-//   function renderSearchHistory() {
-//     searchHistoryEl.empty();
-  
-//     for(var i=0;i<currentHistory.length;i++) {
-//       searchHistoryEl.prepend("<button type='submit' class='history-item mb-3 btn rounded bg-success w-100 font-weight-bold'>" + currentHistory[i] + "</button>");
-//     }
-//   }
-  
-//   // Loads search history and writes to page
-//   function loadStorage() {
-//     var searchHistory = localStorage.getItem("search");
-  
-//     if(!searchHistory) {
-//       return false;
-//     }
-  
-//     currentHistory=JSON.parse(searchHistory);
-  
-//     for(var i=0; i<currentHistory.length; i++) {
-//       searchHistoryEl.prepend("<button type='submit' class='history-item mb-3 btn rounded bg-success w-100 font-weight-bold'>" + currentHistory[i] + "</button>");
-//     }
-//   }
-  
-//   // removes necessary elements before running subsequent search
-//   // Converts search to title case and stores in localStorage before passing to getCoordinates()
-//   $(searchButtonEl).on("click",searchInputEl,function(){
-//     currentDayEl.children("*").remove();
-//     forecastEl.children("*").remove();
-//     search();
-//     renderSearchHistory();
-//   });
-  
-//   //search on history item when clicked
-//   //do not log entry to search history as it already exists there
-//   $(searchHistoryEl).on("click", function(event){
-//     var historySearchTerm = event.target.textContent;
-//     currentDayEl.children("*").remove();
-//     forecastEl.children("*").remove();
-//     search(historySearchTerm);
-//   });
-  
-//   loadStorage();
+conversionButton.addEventListener("click", calculateConversion);
+

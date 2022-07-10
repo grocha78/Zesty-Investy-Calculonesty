@@ -79,3 +79,7 @@ header h1 {
     flex-direction: column;
   }
 
+  .hide {
+    display: none;
+  }
+
