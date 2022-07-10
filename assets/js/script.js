@@ -51,7 +51,7 @@ var drawGraph = function () {
           label: "Growth throughout the Years",
           data,
           fill: true,
-          backgroundColor: "rgba(12, 141, 0, 0.7)",
+          backgroundColor: "rgb(212, 175, 55)",
           borderWidth: 0,
         },
       ],

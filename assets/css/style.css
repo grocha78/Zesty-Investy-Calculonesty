@@ -10,6 +10,20 @@ body {
     background-attachment: fixed;
 }
 
+header {
+    padding: 10px;
+    text-align: center;
+    font-size: 30px;
+}
+
+header h1 {
+    background: #008080;
+    background: linear-gradient(to right, #c6d91c 0%, #000000 25%, #c1af12 50%, #272706 75%, #8c8d1b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
   .container {
     display: flex;
     flex-direction: row;
@@ -49,8 +63,10 @@ body {
     border-radius: 5px;
   }
   .input-group button {
-    background-color: #0c8d00;
+    background: linear-gradient(to right, #bdb81e 0%, #272706 25%, #c1af12 50%, #272706 75%, #8c8d1b 100%);
     color: #fff;
+    font-weight: bolder;
+    font-size: large;
   }
   
   .results {
