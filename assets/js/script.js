@@ -1,3 +1,4 @@
+
 var context = document.getElementById("data-set").getContext("2d");
 var bar = new Chart(context, {});
 
@@ -8,6 +9,9 @@ var contributions = document.getElementById("contributions");
 
 var message = document.getElementById("message");
 var button = document.querySelector(".input-group-button");
+var conversionButton = document.querySelector(".conversion-btn");
+var conversionContainerEl = document.querySelector("#conversion-container");
+var convertedAmount = document.querySelector(".converted-amount");
 
 var data = [];
 var labels = [];
@@ -29,12 +33,15 @@ var calculateGrowth = function (e) {
         contribute + initial * Math.pow(1 + interest / 100 / 1, 1 * i);
       data.push(toDecimal(final, 2));
       labels.push("Year " + i);
-      growth = toDecimal(final, 2);
-      growth = dollarUSLocale.format(growth);
+      rawGrowth = toDecimal(final, 2);
+      growth = dollarUSLocale.format(rawGrowth);
     }
 
     message.innerText = `You will have this amount $${growth} after ${period} years`;
     drawGraph();
+    var investmentTotal = localStorage.setItem("Account-Balance", rawGrowth);
+    conversionContainerEl.classList.remove("hide");
+    return investmentTotal;
   } catch (error) {
     console.error(error);
   }
@@ -64,3 +71,40 @@ var toDecimal = function (value, decimals) {
 };
 
 button.addEventListener("click", calculateGrowth);
+
+var calculateConversion = function (event) {
+  event.preventDefault();
+  var myHeaders = new Headers();
+  myHeaders.append("apikey", "21x8PSp7AjckH13xSwlutwsSoLp93Tib");
+
+  var requestOptions = {
+    method: "GET",
+    redirect: "follow",
+    headers: myHeaders,
+  };
+
+  var investmentTotal = localStorage.getItem("Account-Balance");
+  var countryInput = document.querySelector("#currency-conversions");
+  var to = countryInput.value;
+
+  console.log(to, investmentTotal);
+  fetch(
+    `https://api.apilayer.com/exchangerates_data/convert?to=${to}&from=USD&amount=${investmentTotal}`,
+    requestOptions
+  ).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (data) {
+        convertedValue(data);
+      });
+    }
+  });
+
+  var convertedValue = function (value) {
+    console.log(value.result);
+    rawValue = value.result;
+    filteredValue = toDecimal(rawValue, 2);
+    convertedAmount.textContent = filteredValue;
+  };
+};
+
+conversionButton.addEventListener("click", calculateConversion);
