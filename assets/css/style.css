@@ -70,6 +70,11 @@ header h1 {
     outline: none;
     border-radius: 5px;
   }
+
+  .conversion-form p {
+    margin: 10px 0;
+  }
+
   .input-group button {
     background: linear-gradient(to right, #bdb81e 0%, #272706 25%, #c1af12 50%, #272706 75%, #8c8d1b 100%);
     color: #fff;
@@ -104,6 +109,10 @@ header h1 {
   }
 
   .conversion-form {
+    width: 350px;
+    margin: 0 auto;
+    height: 200px;
+    text-align: center;
     font-weight: bolder;
     color: #14770b
   }

@@ -53,22 +53,23 @@
           <h3 id="message"></h3>
           <canvas id="data-set"></canvas>
         </div>
-        <div class="hide" id="conversion-container">
-          <form class="conversion-form">
-            <div class="input-group">
-              <label for="conversions">Conversion Rates Using the USD.</label>
-              <input
-                type="char"
-                maxlength="3"
-                min="3"
-                id="currency-conversions"
-              />
-              <div class="converted-amount"></div>
-            </div>
-            <button class="conversion-btn">Calculate Exchange Rate</button>
-          </form>
-        </div>
       </section>
+      <div class="hide" id="conversion-container">
+        <form class="conversion-form">
+          <div class="input-group">
+            <label for="conversions">
+              <p>Please refer to table to select a short hand form of currency(JPY, EUR, etc.) that you'd like to convert your USD to and type below.</p></label>
+            <input
+              type="char"
+              maxlength="3"
+              min="3"
+              id="currency-conversions"
+            />
+            <div class="converted-amount"></div>
+          </div>
+          <button class="conversion-btn">Calculate Exchange Rate</button>
+        </form>
+      </div>
       <script src="./assets/js/script.js"></script>
     </body>
   </html>
