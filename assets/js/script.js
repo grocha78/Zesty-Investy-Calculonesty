@@ -25,11 +25,11 @@ var calculateGrowth = function (e) {
     var period = parseInt(years.value);
     var interest = parseInt(rates.value);
     var contribute = parseInt(contributions.value);
-
+    var newInterest = interest / 100 / 12;
+    console.log(newInterest);
     for (var i = 1; i <= period; i++) {
       let dollarUSLocale = Intl.NumberFormat("en-US");
-      var final =
-        contribute + initial * Math.pow(1 + interest / 100 / 1, 1 * i);
+      var final = contribute + initial * Math.pow(1 + newInterest, 12 * i);
       data.push(toDecimal(final, 2));
       labels.push("Year " + i);
       rawGrowth = toDecimal(final, 2);
