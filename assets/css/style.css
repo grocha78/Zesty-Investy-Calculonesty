@@ -33,20 +33,28 @@ header h1 {
   
   .calculator {
     width: 40%;
-    color: #063102;
+    color: #14770b;
   }
   
   .heading h3 {
     font-size: 25px;
-    color: #063102;
+    color: #14770b;
+  }
+
+  .heading small {
+    font-weight: bolder;
+    color: #14770b
+
   }
   #message {
     font-size: 20px;
-    color: #063102;
+    color: #14770b;
   }
   
   .input-group {
     margin: 20px 0;
+    font-weight: bolder;
+    color: #14770b
   }
 
   .input-group label {
@@ -83,3 +91,19 @@ header h1 {
     display: none;
   }
 
+  .conversion-btn {
+    width: 70%;
+    padding: 12px;
+    border: 1px solid #11650a;
+    outline: none;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bolder;
+    font-size: small;
+    background: linear-gradient(to right, #bdb81e 0%, #272706 25%, #c1af12 50%, #272706 75%, #8c8d1b 100%);
+  }
+
+  .conversion-form {
+    font-weight: bolder;
+    color: #14770b
+  }
