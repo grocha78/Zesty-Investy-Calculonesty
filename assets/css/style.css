@@ -1,72 +1,118 @@
 * {
-  padding: 0;
-  margin: 0;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  box-sizing: border-box;
-}
-
+    padding: 0;
+    margin: 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    box-sizing: border-box;
+  }
+  
 body {
-  background-image: linear-gradient(
-    110.3deg,
-    rgba(130, 178, 216, 32%) 4.3%,
-    rgba(121, 136, 194, 35%) 96.7%
-  );
-  background-attachment: fixed;
+    background-image: linear-gradient( 110.3deg,  rgba(130,178,216,32%) 4.3%, rgba(121,136,194,35%) 96.7% );
+    background-attachment: fixed;
 }
 
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: 40px;
+header {
+    padding: 10px;
+    text-align: center;
+    font-size: 30px;
 }
 
-.calculator {
-  width: 40%;
-  color: #063102;
+header h1 {
+    background: #008080;
+    background: linear-gradient(to right, #c6d91c 0%, #000000 25%, #c1af12 50%, #272706 75%, #8c8d1b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
 }
 
-.heading h3 {
-  font-size: 25px;
-  color: #063102;
-}
-#message {
-  font-size: 20px;
-  color: #063102;
-}
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 40px;
+  }
+  
+  .calculator {
+    width: 40%;
+    color: #14770b;
+  }
+  
+  .heading h3 {
+    font-size: 25px;
+    color: #14770b;
+  }
 
-.input-group {
-  margin: 20px 0;
-}
+  .heading small {
+    font-weight: bolder;
+    color: #14770b
 
-.input-group label {
-  display: block;
-}
+  }
+  #message {
+    font-size: 20px;
+    color: #14770b;
+  }
+  
+  .input-group {
+    margin: 20px 0;
+    font-weight: bolder;
+    color: #14770b
+  }
 
-.input-group input,
-.input-group button,
-.input-group select {
-  width: 70%;
-  padding: 12px;
-  border: 1px solid #0c8d00;
-  outline: none;
-  border-radius: 5px;
-}
-.input-group button {
-  background-color: #0c8d00;
-  color: #fff;
-}
+  .input-group label {
+    display: block;
+  }
+  
+  .input-group input,
+  .input-group button,
+  .input-group select {
+    width: 70%;
+    padding: 12px;
+    border: 1px solid #0c8d00;
+    outline: none;
+    border-radius: 5px;
+  }
 
-.results {
-  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.09);
-  width: 50%;
-  margin: 10px;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
+  .conversion-form p {
+    margin: 10px 0;
+  }
 
-.hide {
-  display: none;
-}
+  .input-group button {
+    background: linear-gradient(to right, #bdb81e 0%, #272706 25%, #c1af12 50%, #272706 75%, #8c8d1b 100%);
+    color: #fff;
+    font-weight: bolder;
+    font-size: large;
+  }
+  
+  .results {
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.09);
+    width: 50%;
+    margin: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .conversion-btn {
+    width: 70%;
+    padding: 12px;
+    border: 1px solid #11650a;
+    outline: none;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bolder;
+    font-size: small;
+    background: linear-gradient(to right, #bdb81e 0%, #272706 25%, #c1af12 50%, #272706 75%, #8c8d1b 100%);
+  }
+
+  .conversion-form {
+    width: 350px;
+    margin: 0 auto;
+    height: 200px;
+    text-align: center;
+    font-weight: bolder;
+    color: #14770b
+  }

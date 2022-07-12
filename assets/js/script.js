@@ -36,7 +36,7 @@ var calculateGrowth = function (e) {
       growth = dollarUSLocale.format(rawGrowth);
     }
 
-    message.innerText = `You will have this amount $${growth} after ${period} years`;
+    message.innerText = `You will have this amount: $${growth} after ${period} years`;
     drawGraph();
     var investmentTotal = localStorage.setItem("Account-Balance", rawGrowth);
     conversionContainerEl.classList.remove("hide");
@@ -57,7 +57,7 @@ var drawGraph = function () {
           label: "Growth throughout the Years",
           data,
           fill: true,
-          backgroundColor: "rgba(12, 141, 0, 0.7)",
+          backgroundColor: "#14770b",
           borderWidth: 0,
         },
       ],
