@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Calculate your total nest egg by the age you plan to retire while having the option to exchange your money from USD to any other form of currency.
+Calculate your total nest egg by the age you plan to retire, while having the option to exchange your money from USD to any other form of currency.
 
 ## Built With
 
@@ -23,5 +23,5 @@ To download our code, you can access my github page at https://github.com/grocha
 
 Created by:
 
-Douglas Red
+Douglas Red &
 Guadalupe Rocha
