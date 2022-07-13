@@ -44,6 +44,8 @@ var calculateGrowth = function (e) {
   } catch (error) {
     console.error(error);
   }
+
+  saveBalance();
 };
 
 var drawGraph = function () {
@@ -69,7 +71,7 @@ var toDecimal = function (value, decimals) {
   return +value.toFixed(decimals);
 };
 
-button.addEventListener("click", calculateGrowth);
+button.addEventListener("click", calculateGrowth) 
 
 var calculateConversion = function (event) {
   event.preventDefault();
@@ -106,4 +108,28 @@ var calculateConversion = function (event) {
   };
 };
 
-conversionButton.addEventListener("click", calculateConversion);
+var saveBalance = function() {
+    localStorage.setItem("Account-Balance", JSON.stringify(balance));
+    console.log(data);
+};
+
+var loadBalance = function() {
+    var savedBalance = localStorage.getItem("Account-Balance");
+    // if there is no balance, set balance to an empty array and return out of the function
+    if (!savedBalance) {
+        return false;
+    }
+    console.log("Saved balance found!");
+    // else, load up saved balance
+
+    // parse into array of objects
+    savedBalance = JSON.parse(savedBalance);
+
+    // loop through savedBalance array
+    for (var i = 0; i < savedBalance.length; i++) {
+        // pass each balance object into the 'calculateGrowth()' function
+        calculateGrowth(savedBalance[i]);
+    }
+};
+
+loadBalance();
