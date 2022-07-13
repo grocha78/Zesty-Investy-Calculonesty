@@ -108,3 +108,10 @@ var calculateConversion = function (event) {
 };
 
 conversionButton.addEventListener("click", calculateConversion);
+
+function localStorage () {
+  localStorage.setElementById("initial-amount", "years", "contributions", "rates");
+  console.log(localStorage.getElementById("inital-amount", "years", "contributions", "rates"));
+  window.getElementById("initial-amount", "years", "contributions", "rates");
+  JSON.parse(window.localStorage.getElementById("initial-amount", "years", "contributions", "rates"));
+}
