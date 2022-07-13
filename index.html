@@ -10,55 +10,60 @@
   </head>
   <body>
     <header>
-        <h1>Zesty Investy</h1>
+      <h1>Zesty Investy</h1>
     </header>
     <section class="container">
-        <div class="calculator">
-          <div class="heading">
-            <h3>Compound Interest Calculator</h3>
-            <small>This is how your money grows over time using compound interest:</small>
+      <div class="calculator">
+        <div class="heading">
+          <h3>Compound Interest Calculator</h3>
+          <small
+            >This is how your money grows over time using compound
+            interest:</small
+          >
+        </div>
+        <form class="compound-form">
+          <div class="input-group">
+            <label for="initialamount">Initial Investment Amount</label>
+            <input type="number" id="initial-amount" />
           </div>
-          <form class="compound-form">
-            <div class="input-group">
-              <label for="initialamount">Initial Investment Amount</label>
-              <input type="number" id="initial-amount" />
-            </div>
-            <div class="input-group">
-              <label for="years">Years Until Retirement</label>
-              <input type="number" id="years" />
-            </div>
-            <div class="input-group">
-              <label for="contributions">Monthly Contributions</label>
-              <input type="number" id="contributions" />
-            </div>
-            <div class="input-group">
-              <label for="rates">Approximate Annual Return (%)</label>
-              <input type="number" id="rates" />
-            </div>
-            <!-- <div class="input-group">
-              <label for="rates">Compound Interval</label>
-              <select id="compound">
-                <option value="1">Annualy</option>
-                <option value="2">Semiannualy</option>
-                <option value="4">Quartely</option>
-                <option value="12">Monthly</option>
-              </select>
-            </div> -->
-            <div class="input-group input-group-button">
-              <button>Calculate</button>
-            </div>
-          </form>
-        </div>
-        <div class="results">
-          <h3 id="message"></h3>
-          <canvas id="data-set"></canvas>
-        </div>
-      </section>
-      <div class="hide" id="conversion-container">
+          <div class="input-group">
+            <label for="years">Years Until Retirement</label>
+            <input type="number" id="years" />
+          </div>
+          <div class="input-group">
+            <label for="contributions">Monthly Contributions</label>
+            <input type="number" id="contributions" />
+          </div>
+          <div class="input-group">
+            <label for="rates">Approximate Annual Return (%)</label>
+            <input type="number" id="rates" />
+          </div>
+          <div class="input-group input-group-button">
+            <button>Calculate</button>
+          </div>
+        </form>
+      </div>
+      <div class="results">
+        <h3 id="message"></h3>
+        <canvas id="data-set"></canvas>
+      </div>
+    </section>
+    <section id="api-content-container">
+      <table id="currency-codes" class="hide">
+        <tr class="main-row">
+          <th>Currency Code</th>
+          <th>Territory</th>
+        </tr>
+      </table>
+      <div id="conversion-container" class="hide">
         <form class="conversion-form">
           <div class="input-group">
             <label for="conversions">
-              <p>Please refer to table to select a short hand form of currency(JPY, EUR, etc.) that you'd like to convert your USD to and type below.</p></label>
+                Please refer to table to select a short hand form of
+                currency(JPY, EUR, etc.) that you'd like to convert your USD to
+                and type below.
+              </p></label
+            >
             <input
               type="char"
               maxlength="3"
@@ -71,6 +76,6 @@
         </form>
       </div>
       <script src="./assets/js/script.js"></script>
-    </body>
-  </html>
-  
+    </section>
+  </body>
+</html>

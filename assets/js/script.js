@@ -9,8 +9,11 @@ var contributions = document.getElementById("contributions");
 var message = document.getElementById("message");
 var button = document.querySelector(".input-group-button");
 var conversionButton = document.querySelector(".conversion-btn");
+var apiContainerEl = document.getElementById("api-content-container");
+var results = document.querySelector(".results");
 var conversionContainerEl = document.querySelector("#conversion-container");
 var convertedAmount = document.querySelector(".converted-amount");
+var currencyTable = document.getElementById("currency-codes");
 
 var data = [];
 var labels = [];
@@ -39,6 +42,9 @@ var calculateGrowth = function (e) {
     message.innerText = `You will have this amount: $${growth} after ${period} years`;
     drawGraph();
     var investmentTotal = localStorage.setItem("Account-Balance", rawGrowth);
+    results.classList.add("box-shadow");
+    currencyTable.classList.remove("hide");
+    currencyTable.classList.add("block");
     conversionContainerEl.classList.remove("hide");
     return investmentTotal;
   } catch (error) {
@@ -68,8 +74,6 @@ var drawGraph = function () {
 var toDecimal = function (value, decimals) {
   return +value.toFixed(decimals);
 };
-
-button.addEventListener("click", calculateGrowth);
 
 var calculateConversion = function (event) {
   event.preventDefault();
@@ -106,4 +110,41 @@ var calculateConversion = function (event) {
   };
 };
 
+var myTable = new Headers();
+myTable.append("apikey", "Nz8ARHO3m6OatqxGu8NexGyTeSUEAMps");
+
+var requestSymbols = {
+  method: "GET",
+  redirect: "follow",
+  headers: myTable,
+};
+
+fetch(
+  "https://api.apilayer.com/exchangerates_data/symbols",
+  requestSymbols
+).then(function (response) {
+  if (response.ok) {
+    response.json().then(function (symbols) {
+      displaySymbols(symbols);
+    });
+  }
+});
+
+var displaySymbols = function (symbols) {
+  for (var currencyCode in symbols.symbols) {
+    var group = document.createElement("tr");
+    var code = document.createElement("td");
+    code.textContent = currencyCode;
+    var territory = document.createElement("td");
+    territory.textContent = symbols.symbols[currencyCode];
+    group.appendChild(code);
+    group.appendChild(territory);
+    currencyTable.appendChild(group);
+
+    // console.log("Abbreviation: " + currencyCode);
+    // console.log("Label: " + symbols.symbols[currencyCode]);
+  }
+};
+
+button.addEventListener("click", calculateGrowth);
 conversionButton.addEventListener("click", calculateConversion);
