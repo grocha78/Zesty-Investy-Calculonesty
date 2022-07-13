@@ -9,8 +9,11 @@ var contributions = document.getElementById("contributions");
 var message = document.getElementById("message");
 var button = document.querySelector(".input-group-button");
 var conversionButton = document.querySelector(".conversion-btn");
+var apiContainerEl = document.getElementById("api-content-container");
+var results = document.querySelector(".results");
 var conversionContainerEl = document.querySelector("#conversion-container");
 var convertedAmount = document.querySelector(".converted-amount");
+var currencyTable = document.getElementById("currency-codes");
 
 var data = [];
 var labels = [];
@@ -25,11 +28,11 @@ var calculateGrowth = function (e) {
     var period = parseInt(years.value);
     var interest = parseInt(rates.value);
     var contribute = parseInt(contributions.value);
-
+    var newInterest = interest / 100 / 12;
+    console.log(newInterest);
     for (var i = 1; i <= period; i++) {
       let dollarUSLocale = Intl.NumberFormat("en-US");
-      var final =
-        contribute + initial * Math.pow(1 + interest / 100 / 1, 1 * i);
+      var final = contribute + initial * Math.pow(1 + newInterest, 12 * i);
       data.push(toDecimal(final, 2));
       labels.push("Year " + i);
       rawGrowth = toDecimal(final, 2);
@@ -39,6 +42,9 @@ var calculateGrowth = function (e) {
     message.innerText = `You will have this amount: $${growth} after ${period} years`;
     drawGraph();
     var investmentTotal = localStorage.setItem("Account-Balance", rawGrowth);
+    results.classList.add("box-shadow");
+    currencyTable.classList.remove("hide");
+    currencyTable.classList.add("block");
     conversionContainerEl.classList.remove("hide");
     return investmentTotal;
   } catch (error) {
@@ -70,8 +76,6 @@ var drawGraph = function () {
 var toDecimal = function (value, decimals) {
   return +value.toFixed(decimals);
 };
-
-button.addEventListener("click", calculateGrowth) 
 
 var calculateConversion = function (event) {
   event.preventDefault();
@@ -108,28 +112,41 @@ var calculateConversion = function (event) {
   };
 };
 
-var saveBalance = function() {
-    localStorage.setItem("Account-Balance", JSON.stringify(balance));
-    console.log(data);
+var myTable = new Headers();
+myTable.append("apikey", "Nz8ARHO3m6OatqxGu8NexGyTeSUEAMps");
+
+var requestSymbols = {
+  method: "GET",
+  redirect: "follow",
+  headers: myTable,
 };
 
-var loadBalance = function() {
-    var savedBalance = localStorage.getItem("Account-Balance");
-    // if there is no balance, set balance to an empty array and return out of the function
-    if (!savedBalance) {
-        return false;
-    }
-    console.log("Saved balance found!");
-    // else, load up saved balance
+fetch(
+  "https://api.apilayer.com/exchangerates_data/symbols",
+  requestSymbols
+).then(function (response) {
+  if (response.ok) {
+    response.json().then(function (symbols) {
+      displaySymbols(symbols);
+    });
+  }
+});
 
-    // parse into array of objects
-    savedBalance = JSON.parse(savedBalance);
+var displaySymbols = function (symbols) {
+  for (var currencyCode in symbols.symbols) {
+    var group = document.createElement("tr");
+    var code = document.createElement("td");
+    code.textContent = currencyCode;
+    var territory = document.createElement("td");
+    territory.textContent = symbols.symbols[currencyCode];
+    group.appendChild(code);
+    group.appendChild(territory);
+    currencyTable.appendChild(group);
 
-    // loop through savedBalance array
-    for (var i = 0; i < savedBalance.length; i++) {
-        // pass each balance object into the 'calculateGrowth()' function
-        calculateGrowth(savedBalance[i]);
-    }
+    // console.log("Abbreviation: " + currencyCode);
+    // console.log("Label: " + symbols.symbols[currencyCode]);
+  }
 };
 
-loadBalance();
+button.addEventListener("click", calculateGrowth);
+conversionButton.addEventListener("click", calculateConversion);
