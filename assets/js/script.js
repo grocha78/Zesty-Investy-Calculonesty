@@ -14,6 +14,7 @@ var results = document.querySelector(".results");
 var conversionContainerEl = document.querySelector("#conversion-container");
 var convertedAmount = document.querySelector(".converted-amount");
 var currencyTable = document.getElementById("currency-codes");
+var cardContainerEl = document.querySelector("#card-container");
 
 var data = [];
 var labels = [];
@@ -46,12 +47,14 @@ var calculateGrowth = function (e) {
     currencyTable.classList.remove("hide");
     currencyTable.classList.add("block");
     conversionContainerEl.classList.remove("hide");
+    cardContainerEl.classList.remove("hide");
     return investmentTotal;
   } catch (error) {
     console.error(error);
   }
 
-  saveBalance();
+  // saveBalance();
+
 };
 
 var drawGraph = function () {
@@ -148,5 +151,27 @@ var displaySymbols = function (symbols) {
   }
 };
 
+// var saveBalance = function() {
+//   localStorage.setItem("data", JSON.stringify(balance));
+// };
+
+// var loadBalance = function() {
+//   var savedBalance = localStorage.getItem("data");
+
+//   if (!savedBalance) {
+//     return false;
+//   }
+//   console.log("Saved balance found!");
+
+//   savedBalance = JSON.parse(savedBalance);
+
+//   for (var i = 0; i < savedBalance.length; i++) {
+
+//     calculateGrowth(savedBalance[i]);
+//   }
+// };
+
 button.addEventListener("click", calculateGrowth);
 conversionButton.addEventListener("click", calculateConversion);
+
+// loadBalance();
