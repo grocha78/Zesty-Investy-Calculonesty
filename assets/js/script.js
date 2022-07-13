@@ -15,6 +15,7 @@ var conversionContainerEl = document.querySelector("#conversion-container");
 var convertedAmount = document.querySelector(".converted-amount");
 var currencyTable = document.getElementById("currency-codes");
 
+// Data will contain the total amount for the year and label will contain the year
 var data = [];
 var labels = [];
 
@@ -24,11 +25,14 @@ var calculateGrowth = function (e) {
   labels.length = 0;
   var growth = 0;
   try {
+    //variables for our interest function
     var initial = parseInt(intialAmount.value);
     var period = parseInt(years.value);
     var interest = parseInt(rates.value);
     var contribute = parseInt(contributions.value);
     var newInterest = interest / 100 / 12;
+
+    // calculation for compounding growth  A = P(1 + (r/n))^nt
     for (var i = 1; i <= period; i++) {
       let dollarUSLocale = Intl.NumberFormat("en-US");
       var final =
@@ -36,10 +40,12 @@ var calculateGrowth = function (e) {
         (contribute * ([i] + 1) - contribute * [i]);
       data.push(toDecimal(final, 2));
       labels.push("Year " + i);
+      // converting it into a dollar amount
       rawGrowth = toDecimal(final, 2);
       growth = dollarUSLocale.format(rawGrowth);
     }
 
+    //display the graph and unhide the currency codes and exchange button
     message.innerText = `You will have this amount: $${growth} after ${period} years`;
     drawGraph();
     var investmentTotal = localStorage.setItem("Account-Balance", rawGrowth);
@@ -72,6 +78,7 @@ var drawGraph = function () {
   });
 };
 
+//Mininmize values to have 2 decimal places at most
 var toDecimal = function (value, decimals) {
   return +value.toFixed(decimals);
 };
@@ -91,7 +98,6 @@ var calculateConversion = function (event) {
   var countryInput = document.querySelector("#currency-conversions");
   var to = countryInput.value;
 
-  console.log(to, investmentTotal);
   fetch(
     `https://api.apilayer.com/exchangerates_data/convert?to=${to}&from=USD&amount=${investmentTotal}`,
     requestOptions
@@ -104,7 +110,6 @@ var calculateConversion = function (event) {
   });
 
   var convertedValue = function (value) {
-    console.log(value.result);
     rawValue = value.result;
     filteredValue = toDecimal(rawValue, 2);
     convertedAmount.textContent = filteredValue;
@@ -130,7 +135,7 @@ fetch(
     });
   }
 });
-
+// Creates Table with all of the currency codes
 var displaySymbols = function (symbols) {
   for (var currencyCode in symbols.symbols) {
     var group = document.createElement("tr");
