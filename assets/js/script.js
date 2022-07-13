@@ -29,10 +29,11 @@ var calculateGrowth = function (e) {
     var interest = parseInt(rates.value);
     var contribute = parseInt(contributions.value);
     var newInterest = interest / 100 / 12;
-    console.log(newInterest);
     for (var i = 1; i <= period; i++) {
       let dollarUSLocale = Intl.NumberFormat("en-US");
-      var final = contribute + initial * Math.pow(1 + newInterest, 12 * i);
+      var final =
+        initial * Math.pow(1 + newInterest, 12 * i) +
+        (contribute * ([i] + 1) - contribute * [i]);
       data.push(toDecimal(final, 2));
       labels.push("Year " + i);
       rawGrowth = toDecimal(final, 2);
@@ -140,9 +141,6 @@ var displaySymbols = function (symbols) {
     group.appendChild(code);
     group.appendChild(territory);
     currencyTable.appendChild(group);
-
-    // console.log("Abbreviation: " + currencyCode);
-    // console.log("Label: " + symbols.symbols[currencyCode]);
   }
 };
 
