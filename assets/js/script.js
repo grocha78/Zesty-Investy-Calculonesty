@@ -18,6 +18,7 @@ var cardContainerEl = document.querySelector("#card-container");
 
 var data = [];
 var labels = [];
+// var balance = [];
 
 var calculateGrowth = function (e) {
   e.preventDefault();
@@ -43,6 +44,10 @@ var calculateGrowth = function (e) {
     message.innerText = `You will have this amount: $${growth} after ${period} years`;
     drawGraph();
     var investmentTotal = localStorage.setItem("Account-Balance", rawGrowth);
+    var initialInvest = localStorage.setItem("Initial-Investment", initial);
+    var retireYear = localStorage.setItem("Retire-Years", period);
+    var interestRate = localStorage.setItem("Interest-Rate", interest);
+    var monthCont = localStorage.setItem("Monthly-Contribution", contribute);
     results.classList.add("box-shadow");
     currencyTable.classList.remove("hide");
     currencyTable.classList.add("block");
@@ -92,6 +97,10 @@ var calculateConversion = function (event) {
   };
 
   var investmentTotal = localStorage.getItem("Account-Balance");
+  var initialInvestment = localStorage.getItem("Initial-Investment");
+  var retireYears = localStorage.getItem("Retire-Years");
+  var interestRate = localStorage.getItem("Interest-Rate");
+  var monthCont = localStorage.getItem("Monthly-Contributions");
   var countryInput = document.querySelector("#currency-conversions");
   var to = countryInput.value;
 
@@ -152,11 +161,19 @@ var displaySymbols = function (symbols) {
 };
 
 // var saveBalance = function() {
-//   localStorage.setItem("data", JSON.stringify(balance));
+//   localStorage.setItem("balance", JSON.stringify(balance));
+//   localStorage.setItem("Initial-Investment", initialAmount);
+//   localStorage.setItem("Retire-Years", years);
+//   localStorage.setItem("Interest-Rate", rates);
+//   localStorage.setItem("Monthly-Contribution", contributions);
 // };
 
 // var loadBalance = function() {
-//   var savedBalance = localStorage.getItem("data");
+//   var savedBalance = localStorage.getItem("balance");
+//                    = localStorage.getItem("Initial-Investment");
+//                    = localStorage.getItem("Retire-Years");
+//                    = localStorage.getItem("Interest-Rate");
+//                    = localStorage.getItem("Monthly-Contributions");
 
 //   if (!savedBalance) {
 //     return false;
